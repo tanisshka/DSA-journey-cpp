@@ -1,0 +1,18 @@
+# Compiled files
+*.o
+*.out
+*.exe
+*.obj
+
+# Debug files
+*.log
+
+# Temporary files
+*.tmp
+*~
+
+# Mac / VSCode / system files
+.DS_Store
+.vscode/
+.idea/
+

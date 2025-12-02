@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+
+double e(int x,int n){
+    static double s=1;
+    if(n==0){
+        return s;
+    }
+    s=1+((float)x/n)*s;
+    return e(x,n-1);
+}
+
+int main(){
+    cout<<e(1,10)<<endl;
+    return 0;
+}
