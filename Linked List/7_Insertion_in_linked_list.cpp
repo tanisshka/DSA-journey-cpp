@@ -68,7 +68,7 @@ public:
         t->next = nullptr;
 
         // Case 1: insert at front (also covers empty list)
-        if(position == 0 || first == nullptr){
+        if(position == 0){
             t->next = first;
             first = t;
             return;
@@ -83,6 +83,23 @@ public:
 
         t->next = p->next;
         p->next = t;
+    }
+
+
+    void InsertAtLast(int x){
+        Node *t=new Node;
+        t->data=x;
+        t->next=nullptr;
+
+        if(first==nullptr){
+            first=t;
+            return;
+        }
+        Node *p=first;
+        while(p->next!=nullptr){
+            p=p->next;
+        }
+        p->next=t;
     }
 
     // Destructor
