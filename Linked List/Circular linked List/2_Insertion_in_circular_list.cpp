@@ -186,3 +186,38 @@ public:
         delete head;
     }
 }; 
+
+int main() {
+    Circular_linked_list cll;
+
+    int n;
+    cout << "Enter number of nodes to create: ";
+    cin >> n;
+
+    cll.create(n);
+
+    cout << "\nInitial Circular Linked List:\n";
+    cll.display();
+
+    cout << "\nInserting 100 at the front...\n";
+    cll.InsertFront(100);
+    cll.display();
+
+    cout << "\nInserting 200 at the back...\n";
+    cll.InsertAtBack(200);
+    cll.display();
+
+    cout << "\nInsert at a given position:\n";
+    int pos, value;
+    cout << "Enter position to insert: ";
+    cin >> pos;
+    cout << "Enter value: ";
+    cin >> value;
+
+    cll.Insert(pos, value);
+
+    cout << "\nCircular Linked List after insertion:\n";
+    cll.display();
+
+    return 0;
+}
