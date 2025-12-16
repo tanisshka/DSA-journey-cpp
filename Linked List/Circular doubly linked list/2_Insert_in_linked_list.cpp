@@ -5,7 +5,7 @@ struct Node {
     Node *prev;
     int data;
     Node *next;
-}; // Added semicolon
+};
 
 class Circular_Linked_List {
 private:
@@ -79,22 +79,75 @@ public:
         head = t; 
     }
 
-    //Insert At Back function
-    void InsertAtBack(int x){
-        Node *t=new Node {nullptr,x,nullptr};
-        //Case 1: 0 nodes
-        if(head==nullptr){
-            head=t;
-            t->next=t;
-            t->prev=t;
+    // Insert At Back function
+    void InsertAtBack(int x) {
+        Node *t = new Node{nullptr, x, nullptr};
+        
+        // Case 1: 0 nodes
+        if (head == nullptr) {
+            head = t;
+            t->next = t;
+            t->prev = t;
             return;
         }
 
-        //Case 2: 1 or multiple nodes
-        t->prev=head->prev;
-        t->next=head;
-        head->prev->next=t;
-        head->prev=t;
+        // Case 2: 1 or multiple nodes
+        t->prev = head->prev;
+        t->next = head;
+        head->prev->next = t;
+        head->prev = t;
+    }
+
+    // Insert at a given position 
+    void InsertAtPosition(int pos, int x) {
+        // Case 1: Position is invalid
+        if (pos <= 0) {
+            cout << "Invalid Position. Position must be greater than zero." << endl;
+            return;
+        }
+
+        Node *t = new Node{nullptr, x, nullptr};
+        
+        // Case 2: Position == 1
+        if (pos == 1) {
+            if (head == nullptr) {
+                head = t;
+                t->next = t;
+                t->prev = t;
+                return;
+            }
+
+            t->next = head;
+            t->prev = head->prev;
+            head->prev->next = t;
+            head->prev = t;
+            head = t;
+            return;
+        }
+
+        // Case 3: Position is greater than 1
+        // Check if list is empty
+        if (head == nullptr) {
+            cout << "Cannot insert at position " << pos << " in an empty list" << endl;
+            delete t;
+            return;
+        }
+
+        Node *p = head;
+        for (int i = 1; i < pos - 1; i++) {
+            p = p->next;
+
+            if (p == head) {
+                cout << "Position " << pos << " is out of bounds" << endl;
+                delete t;
+                return;
+            }
+        }
+
+        t->next = p->next;
+        t->prev = p;
+        p->next->prev = t;
+        p->next = t;
     }
 
     // Destructor
@@ -129,6 +182,10 @@ int main() {
     
     cout << "\nAfter InsertAtBack(200):" << endl;
     list.InsertAtBack(200);
+    list.display();
+    
+    cout << "\nAfter InsertAtPosition(3, 150):" << endl;
+    list.InsertAtPosition(3, 150);
     list.display();
     
     return 0;
