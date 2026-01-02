@@ -16,7 +16,8 @@ private:
     void Preorder(Node* p);
     void Postorder(Node* p);
     void DestroyTree(Node* p);
-    
+    int Height(Node* p);
+
 public:
     Binary_Tree();
     ~Binary_Tree();
@@ -24,8 +25,7 @@ public:
     void Create_Tree();
     void LevelOrder();
     void Display(int order = 1);
-
-
+    void Height();
 };
 
 // ---------------- Constructor ----------------
@@ -150,9 +150,22 @@ void Binary_Tree::Display(int order) {
     cout << endl;
 }
 
+// ---------------- Height ----------------
+int Binary_Tree::Height(Node* p) {
+    int x, y;
 
+    if (p == nullptr)
+        return 0;
 
+    x = Height(p->lchild);
+    y = Height(p->rchild);
 
+    return max(x, y) + 1;
+}
+
+void Binary_Tree::Height() {
+    cout << "Height of Tree: " << Height(root) << endl;
+}
 
 // ---------------- Main ----------------
 int main() {
@@ -165,6 +178,9 @@ int main() {
     tree.Display(2);
     tree.Display(3);
     tree.Display(4);
+
+    cout << "\n--- Height ---\n";
+    tree.Height();
 
     return 0;
 }
