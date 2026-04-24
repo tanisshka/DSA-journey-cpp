@@ -42,3 +42,60 @@ int main() {
     cout << "\nVertex: 4\n";
     BFS(4, A, 8);
 }
+
+class Solution {
+private:
+    void BFS(int row,int col,vector<vector<int>> &vis, vector<vector<char>> &grid){
+        vis[row][col]=1;
+
+        queue<pair<int,int>> q;
+        q.push({row,col});
+
+        int n=grid.size();
+        int m=grid[0].size();
+
+        while(!q.empty()){
+            int row=q.front().first;
+            int col=q.front().second;
+            q.pop();
+
+            for(int deltarow=-1;deltarow<=1;deltarow++){
+                for(int deltacol=-1;deltacol<=1;deltacol++){
+
+                    int nrow=row + deltarow;
+                    int mcol=col + deltacol;
+
+                    if(nrow>=0 && nrow<n && mcol>=0 && mcol<m 
+                    && grid[nrow][mcol]=='1' && vis[nrow][mcol]==0){
+
+                        vis[nrow][mcol]=1;
+                        q.push({nrow,mcol});
+                    }
+                }
+            }
+        }
+    }
+
+public:
+    int numIslands(vector<vector<char>>& grid) {
+
+        int n=grid.size();
+        int m=grid[0].size();
+        int cnt=0;
+
+        vector<vector<int>> vis(n,vector<int>(m,0));
+
+        for(int row=0;row<n;row++){
+            for(int col=0;col<m;col++){
+
+                if(grid[row][col]=='1' && vis[row][col]==0){
+                    BFS(row,col,vis,grid);
+                    cnt++;
+                }
+
+            }
+        }
+
+        return cnt;
+    }
+};
